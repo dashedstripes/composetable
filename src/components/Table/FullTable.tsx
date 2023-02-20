@@ -42,7 +42,7 @@ const FullTable: React.FC<Props> = ({ }) => {
           currentPage={45}
           firstButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&lt;&lt;</button>}
           previousButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&lt;</button>}
-          numberButton={(text, isDisabled) => <button className='page-button' disabled={isDisabled}>{text}</button>}
+          numberButton={(pageNumber, isDisabled) => <button className='page-button' disabled={isDisabled}>{pageNumber}</button>}
           nextButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&gt;</button>}
           lastButton={(_, isDisabled) => <button className='page-button' disabled={isDisabled}>&gt;&gt;</button>}
         />

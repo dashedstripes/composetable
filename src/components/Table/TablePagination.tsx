@@ -6,7 +6,7 @@ interface Props {
   numOfItems: number;
   firstButton: (isDisabled: boolean) => ReactElement;
   previousButton: (isDisabled: boolean) => ReactElement;
-  numberButton: (text: string, isDisabled: boolean) => ReactElement;
+  numberButton: (pageNumber: number, isDisabled: boolean) => ReactElement;
   nextButton: (isDisabled: boolean) => ReactElement;
   lastButton: (text: string, isDisabled: boolean) => ReactElement;
 }
@@ -37,13 +37,13 @@ const TablePagination: React.FC<Props> = ({
       )}
 
     {currentPage - 1 > 0 && (
-        numberButton(`${currentPage - 1}`, false)
+        numberButton(currentPage - 1, false)
       )}
 
-      {numberButton(`${currentPage}`, true)}
+      {numberButton(currentPage, true)}
 
       {currentPage + 1 < totalPages && (
-        numberButton(`${currentPage + 1}`, false)
+        numberButton(currentPage + 1, false)
       )}
 
       {currentPage < totalPages && (
