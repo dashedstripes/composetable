@@ -4,14 +4,22 @@ interface Props {
   currentPage: number;
   itemsPerPage: number;
   numOfItems: number;
-  button: (text: string, isDisabled: boolean) => ReactElement;
+  firstButton: (isDisabled: boolean) => ReactElement;
+  previousButton: (isDisabled: boolean) => ReactElement;
+  numberButton: (text: string, isDisabled: boolean) => ReactElement;
+  nextButton: (isDisabled: boolean) => ReactElement;
+  lastButton: (text: string, isDisabled: boolean) => ReactElement;
 }
 
 const TablePagination: React.FC<Props> = ({
   currentPage,
   itemsPerPage,
   numOfItems,
-  button
+  firstButton,
+  previousButton,
+  numberButton,
+  nextButton,
+  lastButton
 }) => {
   const totalPages = numOfItems / itemsPerPage;
 
@@ -21,13 +29,29 @@ const TablePagination: React.FC<Props> = ({
 
   return (
     <div>
-      {button('First', currentPage <= 1)}
-      {button('Previous', currentPage <= 1)}
+      {currentPage > 1 && (
+        <>
+          {firstButton(currentPage <= 1)}
+          {previousButton(currentPage <= 1)}
+        </>
+      )}
 
-      {button(`${currentPage}`, false)}
+    {currentPage - 1 > 0 && (
+        numberButton(`${currentPage - 1}`, false)
+      )}
 
-      {button('Next', currentPage > totalPages)}
-      {button('Last', currentPage > totalPages)}
+      {numberButton(`${currentPage}`, true)}
+
+      {currentPage + 1 < totalPages && (
+        numberButton(`${currentPage + 1}`, false)
+      )}
+
+      {currentPage < totalPages && (
+        <>
+        {nextButton(currentPage > totalPages)}
+        {lastButton(`${totalPages}`, currentPage > totalPages)}
+        </>
+      )}
     </div>
   )
 }

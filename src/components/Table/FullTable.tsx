@@ -39,10 +39,12 @@ const FullTable: React.FC<Props> = ({ }) => {
         <TablePagination
           itemsPerPage={2}
           numOfItems={300}
-          currentPage={1}
-          button={(text, isDisabled) => (
-            <button className='page-button' disabled={isDisabled}>{text}</button>
-          )}
+          currentPage={45}
+          firstButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&lt;&lt;</button>}
+          previousButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&lt;</button>}
+          numberButton={(text, isDisabled) => <button className='page-button' disabled={isDisabled}>{text}</button>}
+          nextButton={(isDisabled) => <button className='page-button' disabled={isDisabled}>&gt;</button>}
+          lastButton={(_, isDisabled) => <button className='page-button' disabled={isDisabled}>&gt;&gt;</button>}
         />
       </div>
     </div>
