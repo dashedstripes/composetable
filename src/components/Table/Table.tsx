@@ -14,7 +14,9 @@ const Table: React.FC<Props> = ({
       <thead>
         <tr>
           {headers?.map((header) => (
-            <th key={`header-${header.key}`}>{header.data}</th>
+            <th key={`header-${header.key}`}>
+              <td>{header.data}</td>
+            </th>
           ))}
         </tr>
       </thead>

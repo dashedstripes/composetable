@@ -1,0 +1,43 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #eaeaea;
+}
+
+td {
+  padding: 0.5rem;
+}
+
+thead {
+  background: #eaeaea;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  text-align: right;
+  border: 1px solid #eaeaea;
+  border-top: 0;
+}
+
+.page-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0.25rem 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 3px;
+}
+
+.page-button:not([disabled]):hover {
+  background: #ffe7e7;
+}
+
+.table-search {
+  padding: 2rem 0;
+  text-align: right;
+}

@@ -16,7 +16,7 @@ interface Props {
 }
 
 const FullTable: React.FC<Props> = ({ }) => {
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState('');
 

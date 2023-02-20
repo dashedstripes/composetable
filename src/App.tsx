@@ -1,4 +1,5 @@
 import './App.css';
+import './components/Table/Table.css';
 import FullTable from './components/Table/FullTable';
 
 function App() {
