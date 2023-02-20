@@ -21,7 +21,7 @@ const TablePagination: React.FC<Props> = ({
   nextButton,
   lastButton
 }) => {
-  const totalPages = numOfItems / rowsPerPage;
+  const totalPages = Math.ceil(numOfItems / rowsPerPage);
 
   if (currentPage < 1 || currentPage > totalPages) {
     return null;
@@ -29,14 +29,11 @@ const TablePagination: React.FC<Props> = ({
 
   return (
     <div>
-      {currentPage > 1 && (
-        <>
-          {firstButton(currentPage <= 1)}
-          {previousButton(currentPage <= 1)}
-        </>
-      )}
 
-    {currentPage - 1 > 0 && (
+      {firstButton(currentPage <= 1)}
+      {previousButton(currentPage <= 1)}
+
+      {currentPage - 1 > 0 && (
         numberButton(currentPage - 1, false)
       )}
 
@@ -46,12 +43,8 @@ const TablePagination: React.FC<Props> = ({
         numberButton(currentPage + 1, false)
       )}
 
-      {currentPage < totalPages && (
-        <>
-        {nextButton(currentPage > totalPages)}
-        {lastButton(totalPages, currentPage > totalPages)}
-        </>
-      )}
+      {nextButton(currentPage >= totalPages)}
+      {lastButton(totalPages, currentPage >= totalPages)}
     </div>
   )
 }

@@ -21,8 +21,8 @@ const Table: React.FC<Props> = ({
       <tbody>
         {rows?.map((row) => (
           <tr key={row?.id}>
-            {row?.cells?.map((i) => (
-              <td key={`${row?.id}-${i.key}`}>{i.data}</td>
+            {row.cells?.map((cell) => (
+              <td key={`${row?.id}-${cell.key}`}>{cell.data}</td>
             ))}
           </tr>
         ))}

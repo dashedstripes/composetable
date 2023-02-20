@@ -2,58 +2,78 @@ import React, { useState } from 'react';
 import Table from './Table';
 import TablePagination from './TablePagination';
 
-const data = {
-  headers: [
-    { key: 'ID', data: <span>ID</span> },
-    { key: 'Name', data: <span>Name</span> }
-  ],
-  rows: [
-    {
-      id: '123',
-      cells: [
-        { key: '123', data: <span>123</span> },
-        { key: 'Adam', data: <span>Adam</span> }
-      ]
-    },
-    {
-      id: '456',
-      cells: [
-        { key: '456', data: <span>456</span> },
-        { key: 'Luna', data: <span>Luna</span> }
-      ]
-    },
-  ]
+// const data = {
+//   headers: [
+//     { key: 'ID', data: <span>ID</span> },
+//     { key: 'Name', data: <span>Name</span> },
+//     { key: 'Actions', data: <></> },
+//   ],
+//   rows: [
+//     {
+//       id: '123',
+//       cells: [
+//         { key: '123', data: <span>123</span> },
+//         { key: 'Adam', data: <span>Adam</span> },
+//         { key: 'actions', data: <button>actions</button> },
+//       ]
+//     },
+//     {
+//       id: '456',
+//       cells: [
+//         { key: '456', data: <span>456</span> },
+//         { key: 'Luna', data: <span>Luna</span> },
+//         { key: 'actions', data: <button>actions</button> },
+//       ]
+//     },
+//   ]
+// }
+
+function generateDummyData(num: number = 110) {
+  let d = [];
+  for (let i = 0; i < num; i++) {
+    d.push({ id: i, name: `${i}` })
+  }
+  return d;
 }
 
 interface Props {
 }
 
 const FullTable: React.FC<Props> = ({ }) => {
-  const [rowsPerPage] = useState(2);
+  const [rowsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalItems = 50;
+  const [data, setData] = useState(generateDummyData());
 
-  const [headers] = useState(data.headers);
-  const [rows, setRows] = useState(data.rows.slice(0, 1));
+  const rows = data?.slice(
+    (currentPage - 1) * rowsPerPage,
+    (currentPage - 1) * rowsPerPage + rowsPerPage
+  ).map((item) => ({
+    id: `${item.id}`, cells: [
+      { key: `${item.id}`, data: <span>{item.id}</span> },
+      { key: `${item.name}`, data: <span>{item.name}</span> },
+    ]
+  }))
 
   return (
     <div>
       <Table
-        headers={headers}
+        headers={[
+          { key: 'ID', data: <span>ID</span> },
+          { key: 'Name', data: <span>Name</span> },
+        ]}
         rows={rows}
       />
       <div className="pagination">
         <TablePagination
           rowsPerPage={rowsPerPage}
-          numOfItems={totalItems}
+          numOfItems={data.length}
           currentPage={currentPage}
           firstButton={(isDisabled) => (
             <button
               className='page-button'
               disabled={isDisabled}
               onClick={() => {
-                setRows(data.rows.slice(0, 1))
                 setCurrentPage(1)
               }}
             >&lt;&lt;</button>
@@ -63,7 +83,6 @@ const FullTable: React.FC<Props> = ({ }) => {
               className='page-button'
               disabled={isDisabled}
               onClick={() => {
-                setRows(data.rows.slice(0, rowsPerPage))
                 setCurrentPage(currentPage - 1)
               }}
             >&lt;</button>
@@ -73,7 +92,6 @@ const FullTable: React.FC<Props> = ({ }) => {
               className='page-button'
               disabled={isDisabled}
               onClick={() => {
-                setRows(data.rows.slice(pageNumber - 1, pageNumber))
                 setCurrentPage(pageNumber)
               }}
             >{pageNumber}</button>
@@ -83,7 +101,6 @@ const FullTable: React.FC<Props> = ({ }) => {
               className='page-button'
               disabled={isDisabled}
               onClick={() => {
-                setRows(data.rows.slice(currentPage - 1, currentPage))
                 setCurrentPage(currentPage + 1)
               }}
             >&gt;</button>
@@ -93,7 +110,6 @@ const FullTable: React.FC<Props> = ({ }) => {
               className='page-button'
               disabled={isDisabled}
               onClick={() => {
-                setRows(data.rows.slice(lastPageNumber - 1, lastPageNumber))
                 setCurrentPage(lastPageNumber)
               }}
             >&gt;&gt;</button>
