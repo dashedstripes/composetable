@@ -2,32 +2,6 @@ import React, { useState } from 'react';
 import Table from './Table';
 import TablePagination from './TablePagination';
 
-// const data = {
-//   headers: [
-//     { key: 'ID', data: <span>ID</span> },
-//     { key: 'Name', data: <span>Name</span> },
-//     { key: 'Actions', data: <></> },
-//   ],
-//   rows: [
-//     {
-//       id: '123',
-//       cells: [
-//         { key: '123', data: <span>123</span> },
-//         { key: 'Adam', data: <span>Adam</span> },
-//         { key: 'actions', data: <button>actions</button> },
-//       ]
-//     },
-//     {
-//       id: '456',
-//       cells: [
-//         { key: '456', data: <span>456</span> },
-//         { key: 'Luna', data: <span>Luna</span> },
-//         { key: 'actions', data: <button>actions</button> },
-//       ]
-//     },
-//   ]
-// }
-
 function generateDummyData(num: number = 110) {
   let d = [];
   for (let i = 0; i < num; i++) {
@@ -52,6 +26,7 @@ const FullTable: React.FC<Props> = ({ }) => {
     id: `${item.id}`, cells: [
       { key: `${item.id}`, data: <span>{item.id}</span> },
       { key: `${item.name}`, data: <span>{item.name}</span> },
+      { key: `action`, data: <button>Action</button>}
     ]
   }))
 
@@ -61,6 +36,7 @@ const FullTable: React.FC<Props> = ({ }) => {
         headers={[
           { key: 'ID', data: <span>ID</span> },
           { key: 'Name', data: <span>Name</span> },
+          { key: 'Actions', data: <span>Actions</span> },
         ]}
         rows={rows}
       />
