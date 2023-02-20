@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Table from './Table';
 import TablePagination from './TablePagination';
+import TableRowsPerPage from './TableRowsPerPage';
 
 function generateDummyData(num: number = 110) {
   let d = [];
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const FullTable: React.FC<Props> = ({ }) => {
-  const [rowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [data, setData] = useState(generateDummyData());
@@ -25,8 +26,8 @@ const FullTable: React.FC<Props> = ({ }) => {
   ).map((item) => ({
     id: `${item.id}`, cells: [
       { key: `${item.id}`, data: <span>{item.id}</span> },
-      { key: `${item.name}`, data: <span>{item.name}</span> },
-      { key: `action`, data: <button>Action</button>}
+      { key: `${item.name}name`, data: <span>{item.name}</span> },
+      { key: `action`, data: <button>Action</button> }
     ]
   }))
 
@@ -41,6 +42,18 @@ const FullTable: React.FC<Props> = ({ }) => {
         rows={rows}
       />
       <div className="pagination">
+        <span>
+          Rows per page
+          <TableRowsPerPage
+            options={[
+              { value: `10` },
+              { value: `20` },
+              { value: `40` },
+            ]}
+            selected={`${rowsPerPage}`}
+            onChange={(value) => setRowsPerPage(parseInt(value))}
+          />
+        </span>
         <TablePagination
           rowsPerPage={rowsPerPage}
           numOfItems={data.length}

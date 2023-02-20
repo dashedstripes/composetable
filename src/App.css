@@ -14,6 +14,8 @@ table, th, td {
 }
 
 .pagination {
+  display: flex;
+  justify-content: space-between;
   padding: 0.5rem;
   text-align: right;
   border: 1px solid black;
