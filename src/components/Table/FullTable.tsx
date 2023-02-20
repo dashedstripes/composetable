@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Table from './Table';
 import TablePagination from './TablePagination';
 import TableRowsPerPage from './TableRowsPerPage';
+import TableSearchInput from './TableSearchInput';
 
 function generateDummyData(num: number = 110) {
   let d = [];
@@ -17,6 +18,7 @@ interface Props {
 const FullTable: React.FC<Props> = ({ }) => {
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
 
   const [data, setData] = useState(generateDummyData());
 
@@ -33,6 +35,13 @@ const FullTable: React.FC<Props> = ({ }) => {
 
   return (
     <div>
+      <div className='table-search'>
+        <TableSearchInput 
+          placeholder='Search'
+          value={searchInput}
+          onChange={(value) => setSearchInput(value)}
+        />
+      </div>
       <Table
         headers={[
           { key: 'ID', data: <span>ID</span> },

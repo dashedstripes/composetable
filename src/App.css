@@ -33,3 +33,8 @@ table, th, td {
 .page-button:not([disabled]):hover {
   background: #ffe7e7;
 }
+
+.table-search {
+  padding: 2rem 0;
+  text-align: right;
+}
