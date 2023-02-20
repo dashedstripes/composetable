@@ -2,18 +2,18 @@ import React, { ReactElement } from 'react';
 
 interface Props {
   currentPage: number;
-  itemsPerPage: number;
+  rowsPerPage: number;
   numOfItems: number;
   firstButton: (isDisabled: boolean) => ReactElement;
   previousButton: (isDisabled: boolean) => ReactElement;
   numberButton: (pageNumber: number, isDisabled: boolean) => ReactElement;
   nextButton: (isDisabled: boolean) => ReactElement;
-  lastButton: (text: string, isDisabled: boolean) => ReactElement;
+  lastButton: (lastPageNumber: number, isDisabled: boolean) => ReactElement;
 }
 
 const TablePagination: React.FC<Props> = ({
   currentPage,
-  itemsPerPage,
+  rowsPerPage,
   numOfItems,
   firstButton,
   previousButton,
@@ -21,7 +21,7 @@ const TablePagination: React.FC<Props> = ({
   nextButton,
   lastButton
 }) => {
-  const totalPages = numOfItems / itemsPerPage;
+  const totalPages = numOfItems / rowsPerPage;
 
   if (currentPage < 1 || currentPage > totalPages) {
     return null;
@@ -49,7 +49,7 @@ const TablePagination: React.FC<Props> = ({
       {currentPage < totalPages && (
         <>
         {nextButton(currentPage > totalPages)}
-        {lastButton(`${totalPages}`, currentPage > totalPages)}
+        {lastButton(totalPages, currentPage > totalPages)}
         </>
       )}
     </div>
